@@ -6,11 +6,14 @@ import android.view.View
 import com.example.appex_motivation.R
 import com.example.appex_motivation.infra.MotivationConstants
 import com.example.appex_motivation.infra.SecurityPreferences
+import com.example.appex_motivation.repository.Mock
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private var mphraseFilter: Int = MotivationConstants.PHRASEFILTER.ALL
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +31,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         img_infinit.setOnClickListener(this)
         img_smile.setOnClickListener(this)
         img_sunny.setOnClickListener(this)
+
+        //Execução Inicial
+        img_infinit.setColorFilter(resources.getColor(R.color.colorAccent))
+        handleNewPhrase()
+
+
 
 
     }
@@ -52,15 +61,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         img_sunny.setColorFilter(resources.getColor(R.color.white))
 
 
+
         when (idv) {
             R.id.img_infinit -> {
                 img_infinit.setColorFilter(resources.getColor(R.color.colorAccent))
+                mphraseFilter = MotivationConstants.PHRASEFILTER.ALL
             }
             R.id.img_smile -> {
                 img_smile.setColorFilter(resources.getColor(R.color.colorAccent))
+                mphraseFilter = MotivationConstants.PHRASEFILTER.SMILE
             }
             R.id.img_sunny -> {
                 img_sunny.setColorFilter(resources.getColor(R.color.colorAccent))
+                mphraseFilter = MotivationConstants.PHRASEFILTER.SUNNY
             }
         }
 
@@ -68,6 +81,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun handleNewPhrase() {
-
+        phrase.text = Mock().getPhrase(mphraseFilter)
     }
 }

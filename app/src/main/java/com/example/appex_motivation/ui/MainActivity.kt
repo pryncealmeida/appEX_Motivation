@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mSecurityPreferences = SecurityPreferences(this)
-        t1_main.text = mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME).toString()
+        t1_main.text = "Olá, " + mSecurityPreferences.getString(MotivationConstants.KEY.PERSON_NAME).toString()
 
 
         if (supportActionBar != null) {
